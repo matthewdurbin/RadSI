@@ -12,12 +12,12 @@ RadSI provides a more automated approach, in which you simply enter the source i
 ## Quick Documentation 
 In addition to RadSI.py, there are two important documents:
 
-inventory.csv - This file is your inventory of radiation sources. It can be edited directly, or through the command ADD and DELETE. It contains the following columns:
-        index       - this is the "nick name" of your specific sourc (Ex: medical1)
-        Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)
-        R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)
-        R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)
-        Unit        - this is the units of activity for your source (Ex: mCi)
+inventory.csv - This file is your inventory of radiation sources. It can be edited directly, or through the command ADD and DELETE. It contains the following columns:  
+        index       - this is the "nick name" of your specific sourc (Ex: medical1)  
+        Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)  
+        R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed.   (Ex: 12-7-2019-12:30:00)  
+        R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)  
+        Unit        - this is the units of activity for your source (Ex: mCi) 
         
                 
 halflife.csv - This file is the library of isotopes and their halflifes in seconds. It can be edited directly. 
@@ -26,20 +26,20 @@ halflife.csv - This file is the library of isotopes and their halflifes in secon
 
 INVENTORY - this simply prints the current inventory
 
-ADD - This adds a source to the inventory and updates inventory.csv. The paramters are:
-        name       - this is the "nick name" of your specific sourc (Ex: medical1)
-        Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)
-        R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)
-        R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)
-        Unit        - this is the units of activity for your source (Ex: mCi)
+ADD - This adds a source to the inventory and updates inventory.csv. The paramaters are:  
+        name       - this is the "nick name" of your specific sourc (Ex: medical1)  
+        Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)  
+        R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)  
+        R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)  
+        Unit        - this is the units of activity for your source (Ex: mCi)  
         
-DELETE - this deletes a source from the inventory and updates invetory.csv. The paramter is:
-        name       - this is the "nick name" of your specific sourc (Ex: medical1)
+DELETE - this deletes a source from the inventory and updates invetory.csv. The parameter is:
+        name       - this is the "nick name" of your specific sourc (Ex: medical1)  
         
 NOW - this calculates the current activity of the specified source. The paramter is:
-        name       - this is the "nick name" of your specific sourc (Ex: medical1)
+        name       - this is the "nick name" of your specific sourc (Ex: medical1)  
         
-ON - this calculates the activity of the specified source on a specified datetime. The paramters are:
+ON - this calculates the activity of the specified source on a specified datetime. The parameters are:
         name       - this is the "nick name" of your specific sourc (Ex: medical1)
         date       - this is the datetime at which you wish to calculate the activity of the specified source
    
