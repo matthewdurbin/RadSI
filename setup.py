@@ -6,15 +6,17 @@ Date: Tue July 07 2020
 """
 
 import setuptools
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
     
 setuptools.setup(
     name='RadSI',
     version='1.0.0',
     author='Matthew Durbin',
     author_email='mud370@psu.edu'
-    description='A command-line interface radiation source inventory',
+    description='A command line interface radiation source inventory',
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages()
