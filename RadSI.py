@@ -7,6 +7,7 @@ Date: Tue July 07 2020
 import fire
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
 
@@ -116,7 +117,36 @@ class RadSI(object):
         A = A_0 * np.e ** (-delta_t * np.log(2) / t_hl)
         print("The activity of " + name + " on " + date + " will be:")
         print(A, unit)
-
+        
+    def PLOT(self, name, date = datetime.now()):
+        """
+        Makes a plot of the activity of a specified source from the original
+        referenced activity, untill the specified datetime.
+        name - reference name of a specific source in the inventory
+        date - datetime bound to plot the activity. The current datetime is
+        usedi if not specified
+        """
+        inventory = RadSI.load_inventory()
+        halflife = RadSI.load_halflife()
+        isotope = inventory.at[name, "Isotope"]
+        unit = inventory.at[name, "Unit"]
+        time_0 = inventory.at[name, "R_Date"]
+        time_f = date
+        delta_t = RadSI.elapsed_time(time_0, time_f)
+        time = np.linspace(0,delta_t,100)
+        t_hl = halflife.at[isotope, "Half-Life"]
+        A_0 = inventory.at[name, "R_Activity"]
+        A = A_0 * np.e ** (-time * np.log(2) / t_hl)
+        labels = [time_0.strftime("%b %d %Y %H:%M"),
+                  (time_0+timedelta(0,delta_t/3)).strftime("%b %d %Y %H:%M"),
+                  (time_0+2*timedelta(0,delta_t/3)).strftime("%b %d %Y %H:%M"),
+                  time_f.strftime("%b %d %Y %H:%M")]
+        plt.plot(time, A, color='black')
+        plt.grid()
+        plt.ylabel('Activity in ' + unit)
+        plt.xticks(np.linspace(0,delta_t,4),labels, rotation=25)
+        plt.tight_layout()
+        plt.show()
 
 if __name__ == "__main__":
     fire.Fire(RadSI)
