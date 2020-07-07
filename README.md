@@ -35,13 +35,16 @@ ADD - This adds a source to the inventory and updates inventory.csv. The paramat
         R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)  
         Unit        - this is the units of activity for your source (Ex: mCi)  
         
-DELETE - this deletes a source from the inventory and updates invetory.csv. The parameter is:
+DELETE - This deletes a source from the inventory and updates invetory.csv. The parameter is:
         name       - this is the "nick name" of your specific sourc (Ex: medical1)  
         
-NOW - this calculates the current activity of the specified source. The paramter is:
+NOW - This calculates the current activity of the specified source. The paramter is:
         name       - this is the "nick name" of your specific sourc (Ex: medical1)  
         
-ON - this calculates the activity of the specified source on a specified datetime. The parameters are:
+ON - This calculates the activity of the specified source on a specified datetime. The parameters are:
+        name       - this is the "nick name" of your specific sourc (Ex: medical1) 
+        date       - this is the datetime at which you wish to calculate the activity of the specified source (Ex: 12-7-2019-12:30:00)  
+        
+PLOT - This allows the activity of a specified source to be plotted agaisnt time from the referenced datetime of that source
         name       - this is the "nick name" of your specific sourc (Ex: medical1)
-        date       - this is the datetime at which you wish to calculate the activity of the specified source
-   
+        date       - this is the upperbound of the time plotted (Ex: 12-7-2019-12:30:00). If left blank, the time is taken as now  
