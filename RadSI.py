@@ -119,5 +119,4 @@ class RadSI(object):
 
 
 if __name__ == "__main__":
-    # radsi = RadSI()
     fire.Fire(RadSI)
