@@ -7,7 +7,7 @@ RadSI is a simple CLI method of tracking the activities in your inventory of rad
 ## Motivation 
 As is often the case, each source in a lab or hospital setting gets some sort of binder or massive chart that contains pages of look up tables. Thus to get the activity of a specific source, one has to find the binder or the chart and search through untill you find the right cell that gives you the activity of your source at a specific time.
 
-If you add a new source to your inventory, you have to make a new binder. If you don't have the time you need in the look up table, you have to do some manual interpolation of full calculation to get what you need. You could use spreadsheet software, but that comes with it's own inconveniences. 
+If you add a new source to your inventory, you have to make a new binder. If you don't have the time you need in the look up table, you have to do some manual interpolation or full calculation to get what you need. You could use spreadsheet software, but that comes with it's own inconveniences. 
 
 RadSI provides a more automated approach, in which you simply enter the source in your logged inventory and your activity is calculated - down to second if need be!
 
