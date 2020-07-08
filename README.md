@@ -22,7 +22,7 @@ The following pacakges are required:
 - fire
 
 ### Installation:
-This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of Python, IDEs, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire. (Assuming you have no Python distibution, it's easiest to download Anaconda, pip, fire, then RadSI)
+This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of Python, IDEs, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire. (Assuming you have no Python distibution, it's easiest to download Anaconda, fire, then RadSI)
 With [pip3](https://pip.pypa.io/en/stable/) installed, RadSI should be abled to be downloaded by simply entering
 
         pip3 install RadSI
@@ -34,7 +34,7 @@ or
 Your Inventory will be stored in the current working directory upon the nessesary use of the "INITIALIZE" command.
 To access the Inventory, make sure you are in the directory that you "INITIALIZE"-d in. You can use different directories for different inventories. 
 
-If you need to add a package from the Dependencies section, and you have pip, you can do so as follows:
+Pip should have came with you instilation of Anaconda, if not you can follow the link above.If you need to add a package from the Dependencies section, and you have pip, you can do so as follows:
 
         pip install package
 
