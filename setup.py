@@ -13,7 +13,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="RadSI",
-    version="1.0.5",
+    version="1.0.6",
     py_modules=["RadSI"],
     author="Matthew Durbin",
     author_email="mud370@psu.edu",
@@ -22,13 +22,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
-    install_requires=[
-        "setuptools",
-        "pandas >= 1.0.3",
-        "numpy >= 1.18.1",
-        "fire >= 0.3.1",
-        "matplotlib >= 3.1.3",
-    ],
+    install_requires=["setuptools", "pandas", "numpy", "fire", "matplotlib",],
     python_requires=">=3.5",
     classifiers=[
         "Programming Language :: Python :: 3",
