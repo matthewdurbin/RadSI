@@ -50,7 +50,11 @@ If you need to add a package from the Dependencies section, and you have pip, yo
         pip install package
 
 ### Commands:
-To use a command, simplytype RadSI{space}COMMAND{space}Parameters into your python terminal 
+To use a command, simply type 
+
+        RadSI COMMAND Parameters 
+        
+into your python terminal 
 
 INITIALIZE - this command must be executed first! It initializes two .csv files in your current directory:
         inventory.csv- this is your radiation source inventory. Though blank at first, it can be maniuplated with ADD and DELETE
