@@ -1,6 +1,6 @@
 # RadSI - The Radiation Source Inventory
 
-RadSI is a simple CLI method of tracking the activities in your inventory of radioactive sources.
+RadSI is a simple command-line interface (CLI) method of tracking the activities in your inventory of radioactive sources.
 
 ![RadSI_Demo](RadSI.PNG)
 
@@ -22,7 +22,7 @@ The following pacakges are required:
 - fire
 
 ### Installation:
-This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of python, IDEs, many packages, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire.
+This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of python, IDEs, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire.
 With [pip3](https://pip.pypa.io/en/stable/) installed, RadSI should be abled to be downloaded by simply entering
 
         pip3 install RadSI
@@ -32,7 +32,7 @@ or
         pip install -i https://test.pypi.org/simple/ RadSI==1.0.6
 
 Your Inventory will be stored in the current working directory upon the nessesary use of the "INITIALIZE" command.
-To access a inventory, make sure you are in the directory that you "INITIALIZE"-d in.
+To access the Inventory, make sure you are in the directory that you "INITIALIZE"-d in. You can use different directories for different inventories. 
 
 If you need to add a package from the Dependencies section, and you have pip, you can do so as follows:
 
@@ -43,7 +43,11 @@ To use a command, simply type
 
         RadSI COMMAND Parameters 
         
-into your python terminal 
+into your python terminal. For example:
+
+        RadSI NOW calibration1
+        
+Will print the current activity of the source named 'calibration1' in your Inventory. Below is a list of available commands. 
 
 INITIALIZE - this command must be executed first! It initializes two .csv files in your current directory:
         inventory.csv- this is your radiation source inventory. Though blank at first, it can be maniuplated with ADD and DELETE
@@ -79,3 +83,7 @@ PLOT - This allows the activity of a specified source to be plotted agaisnt time
 - date       - this is the upperbound of the time plotted (Ex: 12-7-2019-12:30:00). If left blank, the time is taken as now  
 
 HELP- This simply prints a condensed version of this documentation 
+
+
+## Feedback
+If you use RadSI, I'd very much appreciate your feedback. Feel free to do so via github, or by emailing me at mdurbin@psu.edu.
