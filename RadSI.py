@@ -152,11 +152,10 @@ class RadSI(object):
         plt.show()
 
 
-# def main():
-#     rs = RadSI()
-#     raise SystemExit(rs.__call__(sys.argv))
+def main():
+    fire.Fire(RadSI)
 
 
 if __name__ == "__main__":
-    # main()
-    fire.Fire(RadSI)
+    main()
+
