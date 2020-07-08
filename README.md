@@ -32,7 +32,7 @@ The following pacakges are required:
 - matplotlib
 - fire
 
-### Instilation:
+### Installation:
 This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of python, IDEs, many packages, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire.
 With [pip3](https://pip.pypa.io/en/stable/) installed, RadSI should be abled to be downloaded by simply entering
 
