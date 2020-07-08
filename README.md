@@ -22,7 +22,7 @@ The following pacakges are required:
 - fire
 
 ### Installation:
-This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of python, IDEs, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire.
+This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of Python, IDEs, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire. (Assuming you have no Python distibution, it's easiest to download Anaconda, pip, fire, then RadSI)
 With [pip3](https://pip.pypa.io/en/stable/) installed, RadSI should be abled to be downloaded by simply entering
 
         pip3 install RadSI
