@@ -12,17 +12,6 @@ If you add a new source to your inventory, you have to make a new binder. If you
 RadSI provides a more automated approach, in which you simply enter the source in your logged inventory and your activity is calculated - down to second if need be!
 
 ## Quick Documentation 
-In addition to RadSI.py, there are two important documents:
-
-inventory.csv - This file is your inventory of radiation sources. It can be edited directly, or through the command ADD and DELETE. It contains the following columns:  
-- index       - this is the "nick name" of your specific sourc (Ex: medical1)  
-- Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)  
-- R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed.   (Ex: 12-7-2019-12:30:00)  
-- R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)  
-- Unit        - this is the units of activity for your source (Ex: mCi) 
-        
-                
-halflife.csv - This file is the library of isotopes and their halflifes in seconds. It can be edited directly. 
 
 ### Dependencies
 The following pacakges are required:
