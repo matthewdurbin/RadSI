@@ -5,6 +5,7 @@ Author: Matthew Durbin
 Date: Tue July 07 2020
 """
 import fire
+# import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -151,5 +152,11 @@ class RadSI(object):
         plt.show()
 
 
+# def main():
+#     rs = RadSI()
+#     raise SystemExit(rs.__call__(sys.argv))
+
+
 if __name__ == "__main__":
+    # main()
     fire.Fire(RadSI)

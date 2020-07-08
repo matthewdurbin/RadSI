@@ -13,10 +13,12 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="RadSI",
-    version="1.0.0",
+    version="1.0.1",
+    py_modules=["RadSI"],
     author="Matthew Durbin",
     author_email="mud370@psu.edu",
     description="A CLI radiation source inventory",
+    entry_points={"console_scripts": ["RadSI=RadSI:main"]},
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
