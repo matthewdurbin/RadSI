@@ -24,18 +24,30 @@ inventory.csv - This file is your inventory of radiation sources. It can be edit
                 
 halflife.csv - This file is the library of isotopes and their halflifes in seconds. It can be edited directly. 
 
+### Dependencies
+The following pacakges are required:
+- setuptools
+- pandas
+- numpy
+- matplotlib
+- fire
+
 ### Instilation:
-This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of python, IDEs, many packages, and the Anaconda Prompt.
+This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of python, IDEs, many packages, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire.
 With [pip3](https://pip.pypa.io/en/stable/) installed, RadSI should be abled to be downloaded by simply entering
 
         pip3 install RadSI
 
 or 
 
-        pip install -i https://test.pypi.org/simple/ RadSI==1.0.5
+        pip install -i https://test.pypi.org/simple/ RadSI==1.0.6
 
 Your Inventory will be stored in the current working directory upon the nessesary use of the "INITIALIZE" command.
 To access a inventory, make sure you are in the directory that you "INITIALIZE"-d in.
+
+If you need to add a package from the Dependencies section, and you have pip, you can do so as follows:
+
+        pip install package
 
 ### Commands:
 To use a command, simplytype RadSI{space}COMMAND{space}Parameters into your python terminal 
@@ -72,3 +84,5 @@ ON - This calculates the activity of the specified source on a specified datetim
 PLOT - This allows the activity of a specified source to be plotted agaisnt time from the referenced datetime of that source
 - name       - this is the "nick name" of your specific sourc (Ex: medical1)
 - date       - this is the upperbound of the time plotted (Ex: 12-7-2019-12:30:00). If left blank, the time is taken as now  
+
+HELP- This simply prints a condensed version of this documentation 
