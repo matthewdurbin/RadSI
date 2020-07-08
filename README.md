@@ -24,16 +24,40 @@ inventory.csv - This file is your inventory of radiation sources. It can be edit
                 
 halflife.csv - This file is the library of isotopes and their halflifes in seconds. It can be edited directly. 
 
+### Instilation:
+This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of python, IDEs, many packages, and the Anaconda Prompt.
+With [pip3](https://pip.pypa.io/en/stable/) installed, RadSI should be abled to be downloaded by simply entering
+
+pip3 install RadSI
+
+or 
+
+pip install -i https://test.pypi.org/simple/ RadSI
+
+Your Inventory will be stored in the current working directory upon the nessesary use of the "INITIALIZE" command.
+To access a inventory, make sure you are in the directory that you "INITIALIZE"-d in.
+
 ### Commands:
+To use a command, simplytype RadSI{space}COMMAND{space}Parameters into your python terminal 
+
+INITIALIZE - this command must be executed first! It initializes two .csv files in your current directory:
+        inventory.csv- this is your radiation source inventory. Though blank at first, it can be maniuplated with ADD and DELETE
+        halflife.csv - this is your halflife library, with units of seconds. It comes prebuild with isotopes, but additional isotopes can be added with LIBARARY_ADD
 
 INVENTORY - this simply prints the current inventory
 
+LIBRARY - this simpy prints out the current halflife library
+
 ADD - This adds a source to the inventory and updates inventory.csv. The paramaters are:  
-        name       - this is the "nick name" of your specific sourc (Ex: medical1)  
+        name        - this is the "nick name" of your specific sourc (Ex: medical1)  
         Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)  
         R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)  
         R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)  
         Unit        - this is the units of activity for your source (Ex: mCi)  
+
+LIBRARY_ADD - This adds a isotope tot he halflife library and updates halflife.csv. The Parameters are:
+        Isotope     - this is the isotope to be added, written as the elements initals dash mass number (Ex: Co-60)
+        halflife    - this is the halflife in seconds
         
 DELETE - This deletes a source from the inventory and updates invetory.csv. The parameter is:
         name       - this is the "nick name" of your specific sourc (Ex: medical1)  

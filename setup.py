@@ -13,7 +13,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="RadSI",
-    version="1.0.4",
+    version="1.0.5",
     py_modules=["RadSI"],
     author="Matthew Durbin",
     author_email="mud370@psu.edu",
