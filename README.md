@@ -47,7 +47,7 @@ into your python terminal. For example:
 
         RadSI NOW calibration1
         
-Will print the current activity of the source named 'calibration1' in your Inventory. Below is a list of available commands. 
+Will print the current activity of the source named 'calibration1' in your Inventory. Below is a list of available commands. If you are using Anaconda, you can use the Anaconda Prompt - accepable through the Anaconda Navigator, start, search bar, etc...
 
 INITIALIZE - this command must be executed first! It initializes two .csv files in your current directory:
         inventory.csv- this is your radiation source inventory. Though blank at first, it can be maniuplated with ADD and DELETE
