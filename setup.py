@@ -18,7 +18,7 @@ setuptools.setup(
     author="Matthew Durbin",
     author_email="mud370@psu.edu",
     description="A CLI radiation source inventory",
-    entry_points={"console_scripts": ["RadSI=RadSI:main"]},
+    entry_points={"console_scripts": ["RadSI=RadSI:fire.Fire"]},
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
