@@ -89,6 +89,18 @@ PLOT - This allows the activity of a specified source to be plotted agaisnt time
 HELP- This simply prints a condensed version of this documentation 
 
 
+####A note on date and time
+
+To handle time based calculations, dates and times are entered in the format explained above. The time portion is a 24 hour clock, making midnight and noon 00:00:00 and 12:00:00 resepctively. If no time is specified, midnight is assumed. If no day is specified, the first is assumed. The format is somewhat robust, the following would all represent when the ball dropped in NYC on New Year's Day in 1999:
+
+        01-01-1999:00:00:00   01-01-1999:00:00   01-01-1999:00   01-01-1999   01-01-99   1-1-99
+ 
+The following would all represent the [time President Obama was born](https://obamawhitehouse.archives.gov/blog/2011/04/27/president-obamas-long-form-birth-certificate):
+
+        08-04-1961-19:24:00   08-04-1961-19:24   08-04-61-19:24  8-4-61-19:24
+        
+For isotopes or calculations in which time on the order of hours are relevant, care should be taken to input the reference date in the timezone your "NOW" or "ON" calculations are being performed. 
+
 ## Feedback
 If you use RadSI, I'd very much appreciate your feedback. Feel free to do so via github, or by emailing me at mdurbin@psu.edu.
 
