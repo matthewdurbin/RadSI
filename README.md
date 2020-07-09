@@ -89,7 +89,7 @@ PLOT - This allows the activity of a specified source to be plotted agaisnt time
 HELP- This simply prints a condensed version of this documentation 
 
 
-####A note on date and time
+#### A note on date and time
 
 To handle time based calculations, dates and times are entered in the format explained above. The time portion is a 24 hour clock, making midnight and noon 00:00:00 and 12:00:00 resepctively. If no time is specified, midnight is assumed. If no day is specified, the first is assumed. The format is somewhat robust, the following would all represent when the ball dropped in NYC on New Year's Day in 1999:
 
