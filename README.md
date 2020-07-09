@@ -11,7 +11,26 @@ If you add a new source to your inventory, you have to make a new binder. If you
 
 RadSI provides a more automated approach, in which you simply enter the source in your logged inventory and your activity is calculated - down to second if need be!
 
-## Quick Documentation 
+## Quick Install/Initialization From Scratch (No Python on your computer)
+While there are ultimetly many ways to go from no Python to using RadSI, here is how I would do it. (If you have Anaconda already, skip step 1. If you have Python, and do not want to use the Anaconda Prompt, skip step 1 & 2, use the terminal of your choice making sure your path/activation/etc... conditions are met)
+
+1. Download the latest version of [Anaconda](https://www.anaconda.com/products/individual). This is an open source Python distrubtuion, that comes with many of the packages you need. No need to use a terminal, the webcite has install wizard type options.
+2. Find and open the Anaconda Prompt. You can do this through the Anaconda Navigator, start menu, or by searching on your computer. 
+3. Type the following into Anaconda Prompt. This downloads an additional package you need, that does not come with Anaconda.
+
+        pip install fire
+        
+4. Now type (or copy & paste) the follwoing into the Anaconda Prompt. This downloads RadSI.
+
+        pip install -i https://test.pypi.org/simple/ RadSI
+        
+5. Change your directory to where you want to store your inventory (in other words, navigate to the "folder" you want to use). This can be done by typing "cd" and then the path. 
+6. Type the following command to initialize. 
+
+        RadSI INITIALIZE
+
+This should return a welcome message. This will also create two CSV files and place them in your current directory: inventory.csv and halflife.csv. The former acts as your radiation source iventroy, containing your sources names, isotope, reference date, reference activity, and activity units. The latter is a library of isotopes and their corresponding half-lives in seconds to be used for calculations. Both can be manipulated directly, but it is reccomended to manipulate them via the RadSI CLI to insure propper formatting. When using RadSI, make sure you are in the directory that you INITIALIZE'd in so that RadSI can pull the inventory and library. To use multiple inventories (say for different labs or treatment rooms), simply initialize in seperate folders.
+
 
 ### Dependencies
 The following pacakges are required:
@@ -21,22 +40,7 @@ The following pacakges are required:
 - matplotlib
 - fire
 
-### Installation:
-This CLI is run direcly form a terminal. [Anaconda](https://www.anaconda.com/products/individual) offers a great distibution of Python, IDEs, and the Anaconda Prompt. It also comes with most of the packages you need, with the exception of Fire. (Assuming you have no Python distibution, it's easiest to download Anaconda, fire, then RadSI)
-With [pip3](https://pip.pypa.io/en/stable/) installed, RadSI should be abled to be downloaded by simply entering
-
-        pip3 install RadSI
-
-or 
-
-        pip install -i https://test.pypi.org/simple/ RadSI==1.0.6
-
-Your Inventory will be stored in the current working directory upon the nessesary use of the "INITIALIZE" command.
-To access the Inventory, make sure you are in the directory that you "INITIALIZE"-d in. You can use different directories for different inventories. 
-
-Pip should have came with you instilation of Anaconda, if not you can follow the link above.If you need to add a package from the Dependencies section, and you have pip, you can do so as follows:
-
-        pip install package
+## Documentation 
 
 ### Commands:
 To use a command, simply type 
@@ -47,7 +51,7 @@ into your python terminal. For example:
 
         RadSI NOW calibration1
         
-Will print the current activity of the source named 'calibration1' in your Inventory. Below is a list of available commands. If you are using Anaconda, you can use the Anaconda Prompt - accepable through the Anaconda Navigator, start, search bar, etc...
+Will print the current activity of the source named 'calibration1' in your Inventory. Below is a list of available commands. If you are using Anaconda, open up the Anaconda Prompt.
 
 INITIALIZE - this command must be executed first! It initializes two .csv files in your current directory:
         inventory.csv- this is your radiation source inventory. Though blank at first, it can be maniuplated with ADD and DELETE
@@ -87,3 +91,6 @@ HELP- This simply prints a condensed version of this documentation
 
 ## Feedback
 If you use RadSI, I'd very much appreciate your feedback. Feel free to do so via github, or by emailing me at mdurbin@psu.edu.
+
+#### Acknowledgements 
+Thank you to Josh Gallagher and Josh Flygare for their helpful feedback so far. Additional thanks to Ryan Sheatsley for, with out knowing it, becoming a compsci mentor of sorts!
