@@ -64,7 +64,7 @@ LIBRARY - this simpy prints out the current halflife library
 ADD - This adds a source to the inventory and updates inventory.csv. The paramaters are:  
 - name        - this is the "nick name" of your specific source (Ex: medical1)  
 - Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)  
-- R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)  
+- R_Date      - this is the datetime at which your referenced activity was determined, written as month-day-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)  
 - R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)  
 - Unit        - this is the units of activity for your source (Ex: mCi)  
 
@@ -80,11 +80,11 @@ NOW - This calculates the current activity of the specified source. The paramter
         
 ON - This calculates the activity of the specified source on a specified datetime. The parameters are:
 - name       - this is the "nick name" of your specific sourc (Ex: medical1) 
-- date       - this is the datetime at which you wish to calculate the activity of the specified source (Ex: 12-7-2019-12:30:00)  
+- date       - this is the datetime at which you wish to calculate the activity of the specified source, written as month-day-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)  
         
 PLOT - This allows the activity of a specified source to be plotted agaisnt time from the referenced datetime of that source
 - name       - this is the "nick name" of your specific sourc (Ex: medical1)
-- date       - this is the upperbound of the time plotted (Ex: 12-7-2019-12:30:00). If left blank, the time is taken as now  
+- date       - this is the upperbound of the time plotted (Ex: 12-7-2019-12:30:00), written as month-day-year-hour:minute:second though not all timing info is needed. If left blank, the time is taken as now  
 
 HELP- This simply prints a condensed version of this documentation 
 
