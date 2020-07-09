@@ -33,7 +33,7 @@ This should return a welcome message. This will also create two CSV files and pl
 
 
 ### Dependencies
-The following pacakges are required:
+The following pacakges are required, but don't worry about it if you've followed the steps above:
 - setuptools
 - pandas
 - numpy
