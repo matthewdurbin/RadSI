@@ -54,8 +54,8 @@ into your python terminal. For example:
 Will print the current activity of the source named 'calibration1' in your Inventory. Below is a list of available commands. If you are using Anaconda, open up the Anaconda Prompt.
 
 INITIALIZE - this command must be executed first! It initializes two .csv files in your current directory:
-        inventory.csv- this is your radiation source inventory. Though blank at first, it can be maniuplated with ADD and DELETE
-        halflife.csv - this is your halflife library, with units of seconds. It comes prebuild with isotopes, but additional isotopes can be added with LIBARARY_ADD
+1. inventory.csv- this is your radiation source inventory. Though blank at first, it can be maniuplated with ADD and DELETE
+2. halflife.csv - this is your halflife library, with units of seconds. It comes prebuild with isotopes, but additional isotopes can be added with LIBARARY_ADD
 
 INVENTORY - this simply prints the current inventory
 
