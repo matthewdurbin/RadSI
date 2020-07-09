@@ -62,7 +62,7 @@ INVENTORY - this simply prints the current inventory
 LIBRARY - this simpy prints out the current halflife library
 
 ADD - This adds a source to the inventory and updates inventory.csv. The paramaters are:  
-- name        - this is the "nick name" of your specific sourc (Ex: medical1)  
+- name        - this is the "nick name" of your specific source (Ex: medical1)  
 - Isotope     - this is the isotope of your source, written as the elements initals dash mass number (Ex: Co-60)  
 - R_Date      - this is the datetime at which your referenced activity was determined, written as day-month-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)  
 - R_Activity  - this is the activity of your source at the referenced date time (Ex: 30)  
