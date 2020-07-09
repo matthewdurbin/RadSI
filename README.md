@@ -91,9 +91,9 @@ HELP- This simply prints a condensed version of this documentation
 
 #### A note on date and time
 
-To handle time based calculations, dates and times are entered in the format explained above. The time portion is a 24 hour clock, making midnight and noon 00:00:00 and 12:00:00 resepctively. If no time is specified, midnight is assumed. If no day is specified, the first is assumed. The format is somewhat robust, the following would all represent when the ball dropped in NYC on New Year's Day in 1999:
+To handle time based calculations, dates and times are entered as month-day-year-hour:minute:second, though not all timing info is needed. The time portion is a 24 hour clock, making midnight and noon 00:00:00 and 12:00:00 resepctively. If no time is specified, midnight is assumed. If no day is specified, the first of the month is assumed. The format is somewhat robust, the following would all represent when the ball dropped in NYC on New Year's Day in 1999:
 
-        01-01-1999:00:00:00   01-01-1999:00:00   01-01-1999:00   01-01-1999   01-01-99   1-1-99
+        01-01-1999:00:00:00   01-01-1999:00:00   01-01-1999:00   01-01-1999   01-01-99   1-1-99   1-99
  
 The following would all represent the [time President Obama was born](https://obamawhitehouse.archives.gov/blog/2011/04/27/president-obamas-long-form-birth-certificate):
 
