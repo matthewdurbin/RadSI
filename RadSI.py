@@ -43,6 +43,22 @@ class RadSI(object):
         elapsed = np.abs(timedelta.total_seconds(time1 - time2))
         return elapsed
 
+    def convert(quantity, unit1, unit2):
+        """
+        Converts from unit1 to Bq,then Bq to unit 2
+        quantity - quantity to be converted 
+        unit1 - unit to be converted
+        unit2 - unit converted to
+        """
+        con = {"cf": [37e12, 37e9, 37e6, 37e3, 37, 1e12, 1e9, 1e6, 1e3, 1]}
+        con_df = pd.DataFrame(
+            con,
+            index=["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq"],
+        )
+        mid = quantity * con_df.at[unit1, "cf"]
+        converted = mid / con_df.at[unit2, "cf"]
+        return converted
+
     def INITIALIZE(self):
         """
         Initializes two CSV files in the current directory:
@@ -95,10 +111,16 @@ class RadSI(object):
         hl_df.to_csv("halflife.csv")
         print(
             """
-             ___________________________________________________
+               _/_/_/_/                           _/_/_/_/    _/_/_/_/_/
+              _/      _/                   _/    _/      _/      _/
+             _/      _/                   _/      _/    _/      _/
+            _/_/_/_/      _/_/_/     _/_/_/   _/    _/         _/
+           _/      _/    _/  _/     _/  _/   _/      _/       _/
+          _/        _/  _/_/_/_/   _/_/_/    _/_/_/_/    _/_/_/_/_/
+         ___________________________________________________________
              
               Welcome to RadSI: The Radiation Source Inventory
-             ___________________________________________________
+         ___________________________________________________________
               
               Authored by Matthew Durbin - 2020
               
@@ -109,6 +131,34 @@ class RadSI(object):
               For help: HELP
               """
         )
+
+    def CONVERT(self, quantity, unit1, unit2, round_to=3):
+        """
+        Converts from unit1 to Bq,then Bq to unit 2
+        quantity - quantity to be converted 
+        unit1 - unit to be converted
+        unit2 - unit converted to
+        round_to - number of digits to round()
+        """
+        con = {"cf": [37e12, 37e9, 37e6, 37e3, 37, 1e12, 1e9, 1e6, 1e3, 1]}
+        con_df = pd.DataFrame(
+            con,
+            index=["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq"],
+        )
+        if unit1 in con_df.index:
+            if unit2 in con_df.index:
+                mid = quantity * con_df.at[unit1, "cf"]
+                converted = round(mid / con_df.at[unit2, "cf"], round_to)
+                print(quantity, unit1, "equals", converted, unit2)
+            else:
+                print(
+                    unit2
+                    + " is not an allowed unit. Use HELP for a list of allowed units"
+                )
+        else:
+            print(
+                unit1 + " is not an allowed unit. Use HELP for a list of allowed units"
+            )
 
     def INVENTORY(self):
         """
@@ -143,6 +193,7 @@ class RadSI(object):
         )
         inventory = RadSI.load_inventory()
         halflife = RadSI.load_halflife()
+        units = ["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq"]
         if new.at[name, "Isotope"] in halflife.index:
             if name in inventory.index:
                 print(
@@ -150,8 +201,14 @@ class RadSI(object):
                     + " is already is use. Try a new name, or use DELETE to free the name"
                 )
             else:
-                inventory = inventory.append(new)
-                inventory.to_csv("inventory.csv")
+                if unit in units:
+                    inventory = inventory.append(new)
+                    inventory.to_csv("inventory.csv")
+                else:
+                    print(
+                        unit
+                        + " is not an allowed unit. Use HELP for a list of allowed units"
+                    )
         else:
             print(
                 isotope
@@ -178,12 +235,13 @@ class RadSI(object):
         inventory = inventory.drop([name])
         inventory.to_csv("inventory.csv")
 
-    def NOW(self, name):
+    def NOW(self, name, round_to=3):
         """
         Calculates the current source activity based on the halflife and
         time elapsed since calibrated/fererenced activity, in the unites
         of the reference activity
         name - reference name of a specific source in the inventory
+        round_to - number of digits to round()
         """
         inventory = RadSI.load_inventory()
         halflife = RadSI.load_halflife()
@@ -195,16 +253,50 @@ class RadSI(object):
         t_hl = halflife.at[isotope, "Half-Life"]
         A_0 = inventory.at[name, "R_Activity"]
         A = A_0 * np.e ** (-delta_t * np.log(2) / t_hl)
+        units = ["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq"]
+        if unit in units[:4] and 0.00001 <= A < 0.01:
+            unit2 = units[units.index(unit) + 1]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[:3] and 1e-8 <= A < 1e-5:
+            unit2 = units[units.index(unit) + 2]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[:2] and 1e-11 <= A < 1e-8:
+            unit2 = units[units.index(unit) + 3]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[:1] and A < 1e-11:
+            unit2 = units[units.index(unit) + 4]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:8] and 1e-5 <= A < 0.01:
+            unit2 = units[units.index(unit) + 1]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:7] and 1e-8 <= A < 1e-5:
+            unit2 = units[units.index(unit) + 2]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:6] and A < 1e-8:
+            unit2 = units[units.index(unit) + 3]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:5] and A < 1e-11:
+            unit2 = units[units.index(unit) + 4]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
         print("The activity of " + name + " is currently:")
-        print(A, unit)
+        print(round(A, round_to), unit)
 
-    def ON(self, name, date):
+    def ON(self, name, date, round_to=3):
         """
         Calculates the source activity at a specified datetime based on the
         half life and time elapsed between the calibrated/referenced activity
         and the specified datetime, in the units of the refernce activity
         name - reference name of a specific source in the inventory
         date - datetime to calculate the activity
+        round_to - number of digits to round()
         """
         inventory = RadSI.load_inventory()
         halflife = RadSI.load_halflife()
@@ -216,8 +308,143 @@ class RadSI(object):
         t_hl = halflife.at[isotope, "Half-Life"]
         A_0 = inventory.at[name, "R_Activity"]
         A = A_0 * np.e ** (-delta_t * np.log(2) / t_hl)
+        units = ["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq"]
+        if unit in units[:4] and 0.00001 <= A < 0.01:
+            unit2 = units[units.index(unit) + 1]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[:3] and 1e-8 <= A < 1e-5:
+            unit2 = units[units.index(unit) + 2]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[:2] and 1e-11 <= A < 1e-8:
+            unit2 = units[units.index(unit) + 3]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[:1] and A < 1e-11:
+            unit2 = units[units.index(unit) + 4]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:8] and 1e-5 <= A < 0.01:
+            unit2 = units[units.index(unit) + 1]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:7] and 1e-8 <= A < 1e-5:
+            unit2 = units[units.index(unit) + 2]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:6] and A < 1e-8:
+            unit2 = units[units.index(unit) + 3]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+        elif unit in units[4:5] and A < 1e-11:
+            unit2 = units[units.index(unit) + 4]
+            A = RadSI.convert(A, unit, unit2)
+            unit = unit2
+
         print("The activity of " + name + " on " + date + " will be:")
-        print(A, unit)
+        print(round(A, round_to), unit)
+
+    def ALL(self, date="now", round_to=3):
+        """
+        Calculates the activity of each source in the inventory now or
+        at a specified datetime based on the half life and time elapsed between
+        the referenced activities and the specified datetime 
+        date - datetime to calculate the activity
+        round_to - number of digits to round()
+        """
+        now = datetime.now()
+        inventory = RadSI.load_inventory()
+        halflife = RadSI.load_halflife()
+        As = pd.DataFrame(index=inventory.index)
+        As["Isotope"] = ""
+        As["Activity"] = ""
+        As["Unit"] = ""
+        for i in range(len(inventory)):
+            name = inventory.index[i]
+            isotope = inventory.at[name, "Isotope"]
+            unit = inventory.at[name, "Unit"]
+            time1 = inventory.at[name, "R_Date"]
+            time2 = pd.to_datetime(date)
+            delta_t = RadSI.elapsed_time(time1, time2)
+            t_hl = halflife.at[isotope, "Half-Life"]
+            A_0 = inventory.at[name, "R_Activity"]
+            A = A_0 * np.e ** (-delta_t * np.log(2) / t_hl)
+            units = ["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq"]
+            if unit in units[:4] and 0.00001 <= A < 0.01:
+                unit2 = units[units.index(unit) + 1]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+            elif unit in units[:3] and 1e-8 <= A < 1e-5:
+                unit2 = units[units.index(unit) + 2]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+            elif unit in units[:2] and 1e-11 <= A < 1e-8:
+                unit2 = units[units.index(unit) + 3]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+            elif unit in units[:1] and A < 1e-11:
+                unit2 = units[units.index(unit) + 4]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+            elif unit in units[4:8] and 1e-5 <= A < 0.01:
+                unit2 = units[units.index(unit) + 1]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+            elif unit in units[4:7] and 1e-8 <= A < 1e-5:
+                unit2 = units[units.index(unit) + 2]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+            elif unit in units[4:6] and A < 1e-8:
+                unit2 = units[units.index(unit) + 3]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+            elif unit in units[4:5] and A < 1e-11:
+                unit2 = units[units.index(unit) + 4]
+                A = RadSI.convert(A, unit, unit2)
+                unit = unit2
+
+            As.at[name, "Isotope"] = isotope
+            As.at[name, "Activity"] = round(A, round_to)
+            As.at[name, "Unit"] = unit
+
+        if date == "now":
+            print("The current activities of your inventory are:")
+        else:
+            print("The activities of your inventory on " + date + " will be:")
+        print(As)
+        
+    def WHEN(self, name, A, units="R_unit"):
+        """
+        Calculates the datetime that a source will or was a specified activity 
+        in unites specified
+        name - name of the source
+        A - activity to calculate to solve 'when' for
+        units - units of A (does not have to be units of name in the inventory)
+        """
+        a_units = ["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq", "R_unit"]
+        if units in a_units:
+            inventory = RadSI.load_inventory()
+            halflife = RadSI.load_halflife()
+            isotope = inventory.at[name, "Isotope"]
+            t_hl = halflife.at[isotope, "Half-Life"]
+            A_0 = inventory.at[name, "R_Activity"]
+            time1 = inventory.at[name, "R_Date"]
+            unit = inventory.at[name, "Unit"]
+            if units == "R_unit":
+                units = unit
+            else:
+                A_0=RadSI.convert(A_0, unit, units)
+            delta_t = -t_hl*np.log(A/A_0)/np.log(2)
+            time2 = time1 + timedelta(0,delta_t)
+            if delta_t > 0:
+                print(name + " will be" , A,  units + " on:")
+            else:
+                print(name + " was" , A,  units + " on:")
+            print(time2.strftime("%m-%d-%Y %H:%M:%S"))
+        else:
+            print(units + " is not an allowed unit. Use HELP for a list of allowed units")
+       
 
     def PLOT(self, name, date=datetime.now()):
         """
@@ -247,6 +474,39 @@ class RadSI(object):
         plt.plot(time, A, color="black")
         plt.grid()
         plt.ylabel("Activity in " + unit)
+        plt.title("Activity of " + name)
+        plt.xticks(np.linspace(0, delta_t, 4), labels, rotation=25)
+        plt.tight_layout()
+        plt.show()
+
+    def LOGPLOT(self, name, date=datetime.now()):
+        """
+        Makes a log plot of the activity of a specified source from the original
+        referenced activity, untill the specified datetime.
+        name - reference name of a specific source in the inventory
+        date - datetime bound to plot the activity. The current datetime is
+        usedi if not specified
+        """
+        inventory = RadSI.load_inventory()
+        halflife = RadSI.load_halflife()
+        isotope = inventory.at[name, "Isotope"]
+        unit = inventory.at[name, "Unit"]
+        time_0 = pd.to_datetime(inventory.at[name, "R_Date"])
+        time_f = pd.to_datetime(date)
+        delta_t = RadSI.elapsed_time(time_0, time_f)
+        time = np.linspace(0, delta_t, 100)
+        t_hl = halflife.at[isotope, "Half-Life"]
+        A_0 = inventory.at[name, "R_Activity"]
+        A = A_0 * np.e ** (-time * np.log(2) / t_hl)
+        labels = [
+            time_0.strftime("%b %d %Y %H:%M"),
+            (time_0 + timedelta(0, delta_t / 3)).strftime("%b %d %Y %H:%M"),
+            (time_0 + 2 * timedelta(0, delta_t / 3)).strftime("%b %d %Y %H:%M"),
+            time_f.strftime("%b %d %Y %H:%M"),
+        ]
+        plt.semilogy(time, A, color="black")
+        plt.grid()
+        plt.ylabel("Activity in " + unit)
         plt.xticks(np.linspace(0, delta_t, 4), labels, rotation=25)
         plt.tight_layout()
         plt.show()
@@ -269,9 +529,16 @@ class RadSI(object):
              To calculate the activity of a source at a specified date time:
                  ON name datetime
                  
+             To calculate when a source will be or was a certain activity:
+                 WHEN name activity units
+                 
              Example Datetime format:
-                 Chrsitmas day in 2009: 12-25-2009
-                 When the ball will drop in TimeSquare next year: 1-1-2021-0:0
+                 Chrsitmas day in 2009: 12-25-2009 or 12-25-09
+                 When the ball will drop in TimeSquare next year: 01-01-2021-00:00 or 1-1-21
+                 1 pm on Augsut 31st, 2030: 08-20-2030-13:00 or 8-20-30-13
+                 
+            Allowed unitits of activity:
+                kCi, Ci, mCi, uCi (microcurie), nCi, TBq, GBq, MBq, kBq, Bq
               """
         )
 
