@@ -413,7 +413,7 @@ class RadSI(object):
         else:
             print("The activities of your inventory on " + date + " will be:")
         print(As)
-        
+
     def WHEN(self, name, A, units="R_unit"):
         """
         Calculates the datetime that a source will or was a specified activity 
@@ -422,7 +422,19 @@ class RadSI(object):
         A - activity to calculate to solve 'when' for
         units - units of A (does not have to be units of name in the inventory)
         """
-        a_units = ["kCi", "Ci", "mCi", "uCi", "nCi", "TBq", "GBq", "MBq", "kBq", "Bq", "R_unit"]
+        a_units = [
+            "kCi",
+            "Ci",
+            "mCi",
+            "uCi",
+            "nCi",
+            "TBq",
+            "GBq",
+            "MBq",
+            "kBq",
+            "Bq",
+            "R_unit",
+        ]
         if units in a_units:
             inventory = RadSI.load_inventory()
             halflife = RadSI.load_halflife()
@@ -434,17 +446,18 @@ class RadSI(object):
             if units == "R_unit":
                 units = unit
             else:
-                A_0=RadSI.convert(A_0, unit, units)
-            delta_t = -t_hl*np.log(A/A_0)/np.log(2)
-            time2 = time1 + timedelta(0,delta_t)
+                A_0 = RadSI.convert(A_0, unit, units)
+            delta_t = -t_hl * np.log(A / A_0) / np.log(2)
+            time2 = time1 + timedelta(0, delta_t)
             if delta_t > 0:
-                print(name + " will be" , A,  units + " on:")
+                print(name + " will be", A, units + " on:")
             else:
-                print(name + " was" , A,  units + " on:")
+                print(name + " was", A, units + " on:")
             print(time2.strftime("%m-%d-%Y %H:%M:%S"))
         else:
-            print(units + " is not an allowed unit. Use HELP for a list of allowed units")
-       
+            print(
+                units + " is not an allowed unit. Use HELP for a list of allowed units"
+            )
 
     def PLOT(self, name, date=datetime.now()):
         """
