@@ -2,7 +2,7 @@
 
 RadSI is a simple command-line interface (CLI) method of tracking the activities in your inventory of radioactive sources. You can add sources to your inventory and find out the current activity, activity at a specified date, or when the source will reach a specified activity. 
 
-![RadSI_Demo](RadSI.PNG)
+![RadSI_Demo](RadSI_screenshot.PNG)
 
 ## Motivation 
 As is often the case, each source in a lab or hospital setting gets some sort of binder or massive chart that contains pages of look up tables. Thus to get the activity of a specific source, one has to find the binder or the chart and search through until you find the right cell that gives you the activity of your source at a specific time.
