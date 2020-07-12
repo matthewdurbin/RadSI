@@ -1,28 +1,28 @@
 # RadSI - The Radiation Source Inventory
 
-RadSI is a simple command-line interface (CLI) method of tracking the activities in your inventory of radioactive sources.
+RadSI is a simple command-line interface (CLI) method of tracking the activities in your inventory of radioactive sources. You can add sources to you inventory and find out the current activity, activity at a specified date, or when the source will reach a specified activity. 
 
 ![RadSI_Demo](RadSI.PNG)
 
 ## Motivation 
 As is often the case, each source in a lab or hospital setting gets some sort of binder or massive chart that contains pages of look up tables. Thus to get the activity of a specific source, one has to find the binder or the chart and search through untill you find the right cell that gives you the activity of your source at a specific time.
 
-If you add a new source to your inventory, you have to make a new binder. If you don't have the time you need in the look up table, you have to do some manual interpolation or full calculation to get what you need. You could use spreadsheet software, but that comes with it's own inconveniences. 
+If you add a new source to your inventory, you have to make a new binder. If you don't have the time you need in the look up table, you have to do some manual interpolation or full calculation to get what you need. You could use spreadsheet software, but that comes with it's own inconveniences. These methods are useful, but very limited. 
 
-RadSI provides a more automated approach, in which you simply enter the source in your logged inventory and your activity is calculated - down to second if need be!
+RadSI provides a more automated approach, in which you simply enter the source in your logged inventory and your activity is calculated - down to second if need be! A range of commands are avalible, to quickly give you the information you need in regards to your radioactive sources. 
 
 ## Quick Install/Initialization From Scratch (No Python on your computer)
 While there are ultimetly many ways to go from no Python to using RadSI, here is how I would do it. (If you have Anaconda already, skip step 1. If you have Python, and do not want to use the Anaconda Prompt, skip step 1 & 2, use the terminal of your choice making sure your path/activation/etc... conditions are met)
 
-1. Download the latest version of [Anaconda](https://www.anaconda.com/products/individual). This is an open source Python distrubtuion, that comes with many of the packages you need. No need to use a terminal, the webcite has install wizard type options.
+1. Download the latest version of [Anaconda](https://www.anaconda.com/products/individual). This is an open source Python distrubtuion, that comes with many of the packages you need. No need to use a terminal for this step, follow the link for install wizard options.
 2. Find and open the Anaconda Prompt. You can do this through the Anaconda Navigator, start menu, or by searching on your computer. 
-3. Type the following into Anaconda Prompt. This downloads an additional package you need, that does not come with Anaconda.
+3. Type (or copy & paste) the following into Anaconda Prompt. This downloads an additional package you need, that does not come with Anaconda.
 
         pip install fire
         
 4. Now type (or copy & paste) the follwoing into the Anaconda Prompt. This downloads RadSI.
 
-        pip install -i https://test.pypi.org/simple/ RadSI
+        pip install RadSI
         
 5. Change your directory to where you want to store your inventory (in other words, navigate to the "folder" you want to use). This can be done by typing "cd" and then the path. 
 6. Type the following command to initialize. 
@@ -77,12 +77,23 @@ DELETE - This deletes a source from the inventory and updates invetory.csv. The 
         
 NOW - This calculates the current activity of the specified source. The paramter is:
 - name       - this is the "nick name" of your specific sourc (Ex: medical1)  
+- round_to   - this an optional parameter that tells Rad_SI how many decimals to include. Defaultly it is 3.
         
 ON - This calculates the activity of the specified source on a specified datetime. The parameters are:
 - name       - this is the "nick name" of your specific sourc (Ex: medical1) 
-- date       - this is the datetime at which you wish to calculate the activity of the specified source, written as month-day-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00)  
+- date       - this is the datetime at which you wish to calculate the activity of the specified source, written as month-day-year-hour:minute:second though not all timing info is needed. (Ex: 12-7-2019-12:30:00) 
+- round_to   - this an optional parameter that tells Rad_SI how many decimals to include. Defaultly it is 3.
+
+WHEN - This calculates the when a specified source will reach a specified activity. The parameters are:
+- name       - this is the "nick name" of your specific sourc (Ex: medical1) 
+- activty    - this is the activity for which the datetime is to be solved fore
+- units      - these are the units of the activity
         
 PLOT - This allows the activity of a specified source to be plotted agaisnt time from the referenced datetime of that source
+- name       - this is the "nick name" of your specific sourc (Ex: medical1)
+- date       - this is the upperbound of the time plotted (Ex: 12-7-2019-12:30:00), written as month-day-year-hour:minute:second though not all timing info is needed. If left blank, the time is taken as now  
+
+LOGPLOT - This allows the log of the activity of a specified source to be plotted agaisnt time from the referenced datetime of that source
 - name       - this is the "nick name" of your specific sourc (Ex: medical1)
 - date       - this is the upperbound of the time plotted (Ex: 12-7-2019-12:30:00), written as month-day-year-hour:minute:second though not all timing info is needed. If left blank, the time is taken as now  
 
@@ -100,6 +111,10 @@ The following would all represent the [time President Obama was born](https://ob
         08-04-1961-19:24:00   08-04-1961-19:24   08-04-61-19:24  8-4-61-19:24
         
 For isotopes or calculations in which time on the order of hours are relevant, care should be taken to input the reference date in the timezone your "NOW" or "ON" calculations are being performed. 
+
+#### Allowed activity units
+
+The allowed units of activity are kCi, Ci, mCi, uCi (microcurie), nCi, TBq, GBq, MBq, kBq, Bq. When appropriate, units will autmoatically be adjusted so that instead of 1E-6 Ci being dipslayed, 1 uCi is. 
 
 ## Feedback
 If you use RadSI, I'd very much appreciate your feedback. Feel free to do so via github, or by emailing me at mdurbin@psu.edu.
