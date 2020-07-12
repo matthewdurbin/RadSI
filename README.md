@@ -5,7 +5,7 @@ RadSI is a simple command-line interface (CLI) method of tracking the activities
 ![RadSI_Demo](RadSI_screenshot.PNG)
 
 ## Motivation 
-As is often the case, each source in a lab or hospital setting gets some sort of binder or massive chart that contains pages of look up tables. Thus to get the activity of a specific source, one has to find the binder or the chart and search through until you find the right cell that gives you the activity of your source at a specific time.
+As is often the case, each source in a lab or hospital setting gets some sort of binder or massive chart that contains pages of look up tables. To get the activity of a specific source, one has to find the assocaited binder or the chart and search through until the right cell is found that gives you the activity of your source at a specific time.
 
 If you add a new source to your inventory, you have to make a new binder. If you don't have the time you need in the look up table, you have to do some manual interpolation or full calculation to get what you need. You could use spreadsheet software, but that comes with its own inconveniences. These methods are useful, but very limited. 
 
