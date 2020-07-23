@@ -5,32 +5,30 @@ RadSI is a simple command-line interface (CLI) method of tracking the activities
 ![RadSI_Demo](RadSI_screenshot.PNG)
 
 ## Motivation 
-As is often the case, each source in a lab or hospital setting gets some sort of binder or massive chart that contains pages of look up tables. To get the activity of a specific source, one has to find the assocaited binder or the chart and search through until the right cell is found that gives you the activity of your source at a specific time.
+As is often the case, each source in a lab or hospital setting gets some sort of binder or massive chart that contains pages of look up tables. To get the activity of a specific source, one has to find the associated binder or the chart and search through until the right cell is found that gives you the activity of your source at a specific time.
 
 If you add a new source to your inventory, you have to make a new binder. If you don't have the time you need in the look up table, you have to do some manual interpolation or full calculation to get what you need. You could use spreadsheet software, but that comes with its own inconveniences. These methods are useful, but very limited. 
 
 RadSI provides a more automated approach, in which you simply enter the source in your logged inventory and your activity is calculated - down to second if need be! A range of commands are available, to quickly give you the information you need in regard to your radioactive sources. 
 
 ## Quick Install/Initialization From Scratch (No Python on your computer)
-While there are ultimately many ways to go from no Python to using RadSI, here is how I would do it. (If you have Anaconda already, skip step 1. If you have Python, and do not want to use the Anaconda Prompt, skip step 1 & 2, use the terminal of your choice making sure your path/activation/etc... conditions are met)
+While there are ultimately many ways to go from no Python to using RadSI, here is how I would do it for windows. (If you have Anaconda already, skip step 1. If you have Python, and do not want to use the Anaconda Prompt, skip step 1 & 2, use the terminal of your choice making sure your path/activation/etc... conditions are met)
 
 1. Download the latest version of [Anaconda](https://www.anaconda.com/products/individual). This is an open source Python distribution, that comes with many of the packages you need. No need to use a terminal for this step, follow the link for install wizard options.
-2. Find and open the Anaconda Prompt. You can do this through the Anaconda Navigator, start menu, or by searching on your computer. 
-3. Type (or copy & paste) the following into Anaconda Prompt. This downloads an additional package you need, that does not come with Anaconda.
-
-        pip install fire
-        
-4. Now type (or copy & paste) the following into the Anaconda Prompt. This downloads RadSI.
+2. Find and open the Anaconda Prompt. You can do this through the Anaconda Navigator, start menu, or by searching on your computer.       
+3. Type (or copy & paste) the following into the Anaconda Prompt. This downloads RadSI.
 
         pip install RadSI
         
-5. Change your directory to where you want to store your inventory (in other words, navigate to the "folder" you want to use). This can be done by typing "cd" and then the path. 
-6. Type the following command to initialize. 
+4. Change your directory to where you want to store your inventory (in other words, navigate to the "folder" you want to use). This can be done by typing "cd" and then the path. 
+5. Type the following command to initialize. 
 
         RadSI INITIALIZE
 
 This should return a welcome message. This will also create two CSV files and place them in your current directory: inventory.csv and halflife.csv. The former acts as your radiation source inventory, containing your sources names, isotope, reference date, reference activity, and activity units. The latter is a library of isotopes and their corresponding half-lives in seconds to be used for calculations. Both can be manipulated directly, but it is recommended to manipulate them via the RadSI CLI to insure proper formatting. When using RadSI, make sure you are in the directory that you INITIALIZE'd in so that RadSI can pull the inventory and library. To use multiple inventories (say for different labs or treatment rooms), simply initialize in separate folders.
 
+### Other Install Notes
+While there is not an anaconda prompt for Mac or Linux, the typical terminal can work in a python environment. Importantly, RadSI is not designed to by operated within a IDE console such as Spyder or Jupyter. The pip method should work just the same in the terminal, but your [TLS may need to be updated if you have an older machine](https://disq.us/url?url=https%3A%2F%2Fstackoverflow.com%2Fa%2F49748494%2F1526703%3ALdkbXXLH5zdZ1N45lE2d_Cc-oYg&cuid=4968980). For non RadSI package related errors, see dependencies below.
 
 ### Dependencies
 The following packages are required, but don't worry about it if you've followed the steps above:
@@ -47,7 +45,7 @@ To use a command, simply type
 
         RadSI COMMAND Parameters 
         
-into your python terminal. For example:
+into your python terminal. (The CLI is different then typical python console or script envrionments, in that "equal signs" are not used.) For example:
 
         RadSI NOW calibration1
         
@@ -117,7 +115,7 @@ For isotopes or calculations in which time on the order of hours are relevant, c
 The allowed units of activity are kCi, Ci, mCi, uCi (microcurie), nCi, TBq, GBq, MBq, kBq, Bq. When appropriate, units will automatically be adjusted so that instead of 1E-6 Ci being displayed, 1 uCi is. 
 
 ## Feedback
-If you use RadSI, I'd very much appreciate your feedback. Feel free to do so via github, or by emailing me at mdurbin@psu.edu.
+If you use RadSI, I'd very much appreciate your feedback. Feel free to do so via github, or by emailing me at <mdurbin@psu.edu>.
 
 #### Acknowledgements 
-Thank you to Josh Gallagher and Josh Flygare for their helpful feedback so far. Additional thanks to Ryan Sheatsley for, with out knowing it, becoming a compsci mentor of sorts!
+Thank you to Marc Wonders, Josh Gallagher, and Josh Flygare for their helpful feedback so far. Additional thanks to Ryan Sheatsley for, with out knowing it, becoming a compsci mentor of sorts!
